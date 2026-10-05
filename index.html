@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan Solo</title>
+    <meta name="description"
+        content="Nathan Solo — Club-oriented Live Performer, Digital Jockey and Brutalist Visual Designer. Based in Lausanne, CH.">
+   
+    <link rel="preload" href="AlteHaasGrotesk_Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <style>
+
+        @font-face {
+    font-family: 'AlteHaasGrotesk';
+    src: url('AlteHaasGrotesk_Bold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #f0f0f0;
+            --text-color: #000000;
+            --accent-color: #FF3000;
+            --border-color: #000000;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'AlteHaasGrotesk', Helvetica, sans-serif;
+            margin: 32px;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .header {
+            margin: 0;
+        }
+
+        .title,
+        .main {
+            font-size: 10vh;
+            letter-spacing: -0.5px;
+            line-height: 10vh;
+            margin: 0;
+        }
+
+        .perex {
+            max-width: 750px;
+            font-size: 5vh;
+            line-height: 5vh;
+            letter-spacing: 0;
+            margin-bottom: 5vh;
+        }
+
+        .nav {
+            margin: 0 0 0 -7px;
+        }
+
+        .nav-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            line-height: 0.8em;
+        }
+
+        .nav-item {
+            margin: 0px;
+        }
+
+        .link-menu,
+        .link-menu:visited {
+            color: #FF3000;
+            text-decoration: none;
+        }
+
+        .link-menu:hover,
+        .link-menu:active {
+            color: white;
+            background-color: #FF3000;
+        }
+
+        .top-button {
+            text-align: center;
+            letter-spacing: 0;
+            font-size: 36px;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 80px;
+            padding: 30px 40px;
+            cursor: pointer;
+            font-family: Helvetica, sans-serif;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .top-button.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .top-button p {
+            margin: 0;
+            color: black;
+        }
+
+        .top-button:hover {
+            background-color: black;
+        }
+
+        .top-button:hover p {
+            color: white;
+        }
+
+        .about-section {
+            text-align: left;
+            font-size: 24px;
+            letter-spacing: -2px;
+            line-height: 1em;
+            margin: 0;
+        }
+
+        .paragraph {
+            max-width: 680px;
+            font-size: 17px;
+            line-height: 20px;
+            padding-left: 20px;
+            letter-spacing: 0;
+            text-indent: -20px;
+        }
+
+        .paragraph a,
+        .paragraph a:link,
+        .paragraph a:visited,
+        .paragraph a:active {
+            color: var(--text-color);
+            text-decoration: underline;
+        }
+
+        .paragraph a:hover {
+            color: white;
+            background-color: #FF3000;
+        }
+
+        /* ── LISTEN SECTION ── */
+        .listen-section {
+            margin-top: 64px;
+        }
+
+        .listen-label {
+            font-size: 11px;
+            font-family: monospace;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .listen-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .listen-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .listen-item-label {
+            font-size: 11px;
+            font-family: monospace;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            color: var(--text-color);
+        }
+
+        .listen-item iframe {
+            width: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* ── COLUMNS ── */
+        .columns-container {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            padding-top: 64px;
+        }
+
+        .columns-container a,
+        .columns-container a:link,
+        .columns-container a:visited,
+        .columns-container a:active {
+            color: #FF3000;
+            text-decoration: none;
+        }
+
+        .columns-container a:hover {
+            color: white;
+            background-color: #FF3000;
+        }
+
+        /* ── GIGLIST / RELEASES ── */
+        .giglist,
+        .releases {
+            flex: 1;
+            font-family: monospace;
+            font-weight: 300;
+            font-size: 11px;
+            background-color: transparent;
+        }
+
+        /* Column header */
+        .col-header {
+            font-size: 11px;
+            font-family: monospace;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0 0 8px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* Year accordion */
+        .year-block {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .year-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 6px 0;
+            font-size: 11px;
+            font-family: monospace;
+            font-weight: 700;
+            letter-spacing: 1px;
+            user-select: none;
+        }
+
+        .year-toggle:hover {
+            color: #FF3000;
+        }
+
+        .year-arrow {
+            font-size: 10px;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .year-content {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .year-content.open {
+            max-height: 2000px;
+        }
+
+        .year-arrow.open {
+            transform: rotate(90deg);
+        }
+
+        .gig-entry,
+        .release-entry {
+            margin: 0;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            line-height: 1.4em;
+            font-size: 11px;
+            font-family: monospace;
+            font-weight: 300;
+        }
+
+        .gig-entry:last-child,
+        .release-entry:last-child {
+            border-bottom: none;
+        }
+
+        /* Merch */
+        .merch-albums {
+            margin-top: 32px;
+        }
+
+        .merch-label {
+            font-size: 11px;
+            font-family: monospace;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0 0 8px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            max-width: 320px;
+            margin-top: 8px;
+        }
+
+        .album-item {
+            display: block;
+            text-align: center;
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: 300;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 8px;
+            border-radius: 6px;
+            background: var(--card-bg);
+            transition: background-color 0.25s, color 0.25s;
+        }
+
+        .album-item:hover {
+            background-color: #FF3000;
+            color: white;
+        }
+
+        .album-item img {
+            width: 100%;
+            max-width: 120px;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: block;
+            margin: 0 auto 4px;
+        }
+
+        .album-item:hover img {
+            border-color: white;
+        }
+
+        /* ── PROFILE PHOTO ── */
+        .profile-photo {
+            position: fixed;
+            width: 32.5vh;
+            height: 32.5vh;
+            border-radius: 50%;
+            background-image: url('NS.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -10;
+            pointer-events: none;
+            transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            font-size: 11px;
+            text-align: left;
+            margin-top: 60px;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        .footer a,
+        .footer a:visited {
+            color: var(--text-color);
+        }
+
+        .footer a:hover {
+            color: white;
+            background-color: #FF3000;
+        }
+
+        .epk-button {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        font-family: monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: var(--text-color);
+        text-decoration: none;
+        padding: 4px 4px;
+        z-index: 100;
+        background-color: var(--bg-color);
+        transition: background-color 0.2s, color 0.2s;
+        }
+
+
+        
+        .epk-button:hover {
+        color: #FF3000;
+        text-decoration: underline;
+        border-color: #FF3000;
+        }
+
+        /* ── MOBILE ── */
+        @media only screen and (max-width: 770px) {
+            body {
+                margin-left: 10px !important;
+                margin-right: 10px !important;
+            }
+
+            .top-button {
+                display: none !important;
+            }
+
+            .title,
+            .main {
+                font-size: 9vw;
+                letter-spacing: -0.5px;
+                line-height: 9vw;
+                text-align: left;
+            }
+
+            .perex {
+                font-size: 7vw;
+                line-height: 7vw;
+                letter-spacing: 0;
+                max-width: none;
+            }
+
+            .listen-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .columns-container {
+                flex-direction: column !important;
+                gap: 32px;
+                padding-top: 24px;
+            }
+
+            .giglist,
+            .releases {
+                flex: none !important;
+                width: 100% !important;
+            }
+
+            .merch-albums {
+                margin-top: 24px;
+            }
+
+            .album-grid {
+                gap: 10px;
+                max-width: 100%;
+            }
+
+            .footer {
+                margin-left: 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <main class="main">
+        <nav class="nav">
+            <ul class="nav-list">
+                <li class="nav-item">Nathan Solo <a class="link-menu"
+                        href="https://drive.google.com/drive/folders/1Jk-ggkNWmkN3DXP2xkK7u6oQLh5hCty0?usp=sharing"
+                        target="_blank">Presskit</a></li>
+                <li class="nav-item">Mixes <a class="link-menu" href="https://soundcloud.com/nathansolo"
+                        target="_blank">Soundcloud</a></li>
+				<li class="nav-item">Dances <a class="link-menu"
+                        href="https://www.tiktok.com/@nathansolo_live"
+                        target="_blank">TikTok</a></li>
+                <li class="nav-item">Songs <a class="link-menu"
+                        href="https://open.spotify.com/artist/3euHO10Lb3h6jTzCuXojWW?si=5IGjj5gVShmBSYtbW5rUCg"
+                        target="_blank">Spotify</a></li>
+                <li class="nav-item">Releases <a class="link-menu" href="https://nathansolo.bandcamp.com/"
+                        target="_blank">Bandcamp</a></li>
+                <li class="nav-item">Pictures <a class="link-menu" href="https://instagram.com/nathansolo_live"
+                        target="_blank">Instagram</a></li>
+                <li class="nav-item">Something <a class="link-menu" href="https://facebook.com/Sol000000"
+                        target="_blank">Facebook</a></li>
+                <li class="nav-item">Videos <a class="link-menu" href="https://youtube.com/@nathansolo1230"
+                        target="_blank">Youtube</a></li>
+                <li class="nav-item">Archive <a class="link-menu" href="https://mixcloud.com/SOL-000000/"
+                        target="_blank">Mixcloud</a></li>
+                <li class="nav-item">Log <a class="link-menu" href="https://ra.co/dj/nathansolo"
+                        target="_blank">Resident Advisor</a></li>
+                <li class="nav-item">Contact <a class="link-menu" href="mailto:solo.catalogue@gmail.com">e-mail</a></li>
+            </ul>
+        </nav>
+
+        <a href="https://nathansolo.com/epk" class="epk-button">EPK</a>
+
+        <section id="about" class="about-section">
+            <p class="perex">
+                Nathan Solo is a club-oriented Live Performer, Digital Jockey and Brutalist Visual Designer.
+            </p>
+            <p class="paragraph">
+                Not Han Solo, yet he also travels the world alone with a furry companion — with just two exceptions: it's a cat,
+                and it stays home all the time.
+            </p>
+            <p class="paragraph">
+                Born on planet Prague, now traveling the European galaxy with his home base on planet Lausanne, he brings his
+                spaceship on demand to various edges of the unirave. His sound is dark as the deepest parts of space, gritty and
+                dusty as the rings of Saturn. It can be hard as uncut diamonds, yet if the position of the sun demands it, calm
+                and soft as the Milky Way.
+            </p>
+            <p class="paragraph">
+                A blend of classic Techno (influenced by the Berlin system) with flavours of real Neptunian Electro. Sometimes
+                also experimenting with sounds from the alien markets of labels such as Raster Noton, Semantica, or the old
+                human race's long-forgotten Russian Torrent Records — for its Slavic LoFi&nbsp;flavour.
+            </p>
+            <p class="paragraph">
+                Outside the music space, he provides visuals for music collectives and galleries. A career in graphic design was
+                the key reason for him to move to Lausanne in 2017. Nathan currently lives and works there and co-founded the
+                Swiss-based label <a href="https://www.pulserecords.ch" target="_blank">Pulserecords.ch</a> — releasing music
+                digitally and on cassette tapes, and experimenting with printed zines and streetwear.
+            </p>
+            <p class="paragraph">
+                Get in touch via <a href="https://instagram.com/nathansolo_live" target="_blank">chat</a> or by <a
+                    href="mailto:matej@nathansolo.com" target="_blank">e-mail</a> to check the latest bounty price and
+                travel dates.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- ── LISTEN SECTION ── -->
+    <section class="listen-section">
+        <p class="listen-label">LISTEN</p>
+        <div class="listen-grid">
+            
+		<div class="listen-item">
+                <span class="listen-item-label">Latest EP — Theropodos</span>
+            <iframe style="border: 0; width: 100%; height: 120px;"
+                src="https://bandcamp.com/EmbeddedPlayer/album=1131504439/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
+                seamless><a href="https://pulserecords.bandcamp.com/album/theropodos">Theropodos by Nathan Solo</a></iframe>
+            </div>
+           
+		<div class="listen-item">
+                <span class="listen-item-label">DJ Set — Manifesto / Fonoteca</span>
+                <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/manifesto-official/nathan-solo-cz-fonoteca&color=%23FF3000&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+            </div>
+           
+		<div class="listen-item">
+                <span class="listen-item-label">Live Set at Lakeside Basement Geneva</span>
+                <iframe width="100%" height="120" src="https://www.youtube.com/embed/WzzAEtYW5hA"
+                    title="Nathan Solo Live Set" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="listen-section">
+        <div class="listen-grid">
+
+        <div class="listen-item">
+                <span class="listen-item-label">Album — Audio Research Tactics</span>			
+		<iframe width="100%" height="120px" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A1876477565&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+		</iframe>
+			<div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/nathansolo" title="Nathan Solo" target="_blank" style="color: #cccccc; text-decoration: none;">Nathan Solo</a> · <a href="https://soundcloud.com/nathansolo/sets/art-audio-research-tactics" title="A.R.T. (Audio Research Tactics)" target="_blank" style="color: #cccccc; text-decoration: none;">A.R.T. (Audio Research Tactics)</a>
+			</div>
+		</div>
+
+		<div class="listen-item">
+                <span class="listen-item-label">DJ set – Nathan Solo | Shella Radio</span>
+                <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1999550891&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+			</iframe>
+				<div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/shella-radio" title="Shella Radio" target="_blank" style="color: #cccccc; text-decoration: none;">Shella Radio</a> · <a href="https://soundcloud.com/shella-radio/shella-invites-nathan-solo" title="Shella Invites: Nathan Solo | Shella Radio 02.01.2025" target="_blank" style="color: #cccccc; text-decoration: none;"></a>
+				</div>
+        </div>
+           
+	    <div class="listen-item">
+                <span class="listen-item-label">Live Set at HÖR</span>
+                <iframe width="100%" height="120" src="https://www.youtube.com/embed/9ZhgAdzYvOc?si=ayDmj5N-kJWjXNKO"
+                    title="Nathan Solo Live Set at HÖR Berlin" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── COLUMNS ── -->
+    <div class="columns-container">
+
+        <!-- SHOWS -->
+        <div class="giglist">
+            <p class="col-header">SHOWS</p>
+
+            <div class="year-block">
+                <div class="year-toggle open-by-default" data-year="2026">
+                    <span>2026</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">01 May - La Gravière w/ Olympe4000, Genève, CH</p>
+                    <p class="gig-entry">06 March - Folnui w/Structurals AV laser show, Geneva CH</p>
+                    <p class="gig-entry">07 Feb - CrossClub, Praha CZ</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2025">
+                    <span>2025</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">14 Nov - F2 w/ Vrill, Prague, CZ</p>
+                    <p class="gig-entry">07 Nov - Modu-lair, HRTL release party, BikeJesus, Prague CZ</p>
+                    <p class="gig-entry">30 Aug - Live at MSWB, Lausanne CH</p>
+                    <p class="gig-entry">04 Aug - Live at radio TRNSTN, Fribourg, CH</p>
+                    <p class="gig-entry">11 Jul - Acidelika Festival, CZ</p>
+                    <p class="gig-entry">14 Jun - LakesideBasement, Geneva</p>
+                    <p class="gig-entry">15 May - L'ecurie w/ Pulse Rec., Geneva</p>
+                    <p class="gig-entry">02 May - Fuchs2, Prague</p>
+                    <p class="gig-entry">26 Apr - Pulse / Bleu Lagon, Romandie, Lausanne</p>
+                    <p class="gig-entry">19 Apr - Secret Rave, Lausanne</p>
+                    <p class="gig-entry">11 Apr - Czech Psychedelic Assotiation, Prague</p>
+                    <p class="gig-entry">28 Mar - OMEN, Brno</p>
+                    <p class="gig-entry">01 Mar - Cross Club w/ Stimming, Prague</p>
+                    <p class="gig-entry">28 Feb - Voiid, Lausanne</p>
+                    <p class="gig-entry">11 Jan - Pavillon / Pulse Records, Zine Release, Lausanne</p>
+                    <p class="gig-entry">02 Jan - Radio Shella, Prague</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2024">
+                    <span>2024</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">31 Dec - Komiks Warehouse Rave, Prague</p>
+                    <p class="gig-entry">30 Nov - Lakeside Basement, Geneva</p>
+                    <p class="gig-entry">23 Nov - Animal Social, Lyon</p>
+                    <p class="gig-entry">08 Nov - OnVaOu, Lausanne</p>
+                    <p class="gig-entry">19 Oct - Grau Series, Prague</p>
+                    <p class="gig-entry">14 Sep - OnVaOu, Release Party / Pulse Records, Lausanne</p>
+                    <p class="gig-entry">13 Jul - Motel Campo w/ Pulse Records, Geneva</p>
+                    <p class="gig-entry">07 Jul - Radio Shella, Praha</p>
+                    <p class="gig-entry">29 Jun - Couronne D'Or, Lausanne</p>
+                    <p class="gig-entry">28 Jun - Pulse 6, Lausanne</p>
+                    <p class="gig-entry">21 Jun - Superette, Lausanne</p>
+                    <p class="gig-entry">07 Jun - Central Station, Geneva</p>
+                    <p class="gig-entry">31 May - Jenemar Passejour, Prague</p>
+                    <p class="gig-entry">25 May - Nyx, Lausanne</p>
+                    <p class="gig-entry">24 May - MSBWB, Lausanne</p>
+                    <p class="gig-entry">12 Apr - Pulse 5, Le Bourg</p>
+                    <p class="gig-entry">23 Mar - Central Station, Geneva</p>
+                    <p class="gig-entry">15 Mar - ARTIPHYS, EPFL, Renens</p>
+                    <p class="gig-entry">24 Feb - Pulse 4 w/ Leart Rama</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2023">
+                    <span>2023</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">31 Dec - NYE, Republic Boat, Prague</p>
+                    <p class="gig-entry">31 Dec - NYE, Komiks & NYE</p>
+                    <p class="gig-entry">15 Dec - Les Raveries, Fribourg, CH</p>
+                    <p class="gig-entry">03 Nov - Pulse3 w Voiski, Lausanne, CH</p>
+                    <p class="gig-entry">28 Oct - Noubar, Lausanne</p>
+                    <p class="gig-entry">05 Oct - Machines 3, Le Bourg, Lausanne, CH</p>
+                    <p class="gig-entry">01 Sep - Electrosanne, Lausanne, CH</p>
+                    <p class="gig-entry">26 Aug - Pulse2, Le Bourg, Lausanne, CH</p>
+                    <p class="gig-entry">19 Aug - Atelier, DJset, Lausanne, CH</p>
+                    <p class="gig-entry">08 Jul - Pulse1, Le Bourg, Lausanne, CH</p>
+                    <p class="gig-entry">04 Jul - Petrohradska, Prague, CH</p>
+                    <p class="gig-entry">30 Jun - Folklor, Lausanne, CH</p>
+                    <p class="gig-entry">16 Jun - L'Ecurie, Geneva, CH</p>
+                    <p class="gig-entry">03 May - AcidCafe, Prague, CH</p>
+                    <p class="gig-entry">18 May - Le Bourg, Lausanne, CH</p>
+                    <p class="gig-entry">10 May - Canal 54, Geneva, CH</p>
+                    <p class="gig-entry">12 Mar - TRNST Radio, Fribourg, CH</p>
+                    <p class="gig-entry">30 Mar - Machines 2, Le Bourg, Lausanne</p>
+                    <p class="gig-entry">28 Jan - Elena Colombi, NS - Zoo, Geneve, CH</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2022">
+                    <span>2022</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">31 Dec - Here n There, NYE, Praha, CZ</p>
+                    <p class="gig-entry">14 Nov - NoiseKitchen Farewell, Praha, CZ</p>
+                    <p class="gig-entry">28 Oct - Machines au Bourg, Lausanne, CH</p>
+                    <p class="gig-entry">14 Sep - MCRT, NS, Grid, Prague</p>
+                    <p class="gig-entry">12 Sep - Shotgun Festival, CZ</p>
+                    <p class="gig-entry">07 Jul - Festival de la Cité - Lausanne</p>
+                    <p class="gig-entry">16 Jun - LooseAntenna - Nein Lifes 5</p>
+                    <p class="gig-entry">09 Jun - Pavillon bar, Lausanne</p>
+                    <p class="gig-entry">29 May - Attic, Geneva</p>
+                    <p class="gig-entry">25 May - LooseAntenna - Nein Lifes 4</p>
+                    <p class="gig-entry">11 May - HÖR, Berlin</p>
+                    <p class="gig-entry">21 Apr — LooseAntenna - Nein Lifes 3</p>
+                    <p class="gig-entry">22 Apr — Tetris / FM, Prague</p>
+                    <p class="gig-entry">14 Apr — Operator Radio, Rotterdam</p>
+                    <p class="gig-entry">24 Mar — LooseAntenna - Nein Lifes 2</p>
+                    <p class="gig-entry">24 Feb - LooseAntenna / Ukraine Special</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2021">
+                    <span>2021</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">04 Dec - LooseAntenna at LeGram 4 / Renens, CH</p>
+                    <p class="gig-entry">13 Nov - LooseAntenna at LeGram 3 / Renens, CH</p>
+                    <p class="gig-entry">09 Oct - LooseAntenna at LeGram 2 / Renens, CH</p>
+                    <p class="gig-entry">01 Oct - Anormal w/ Vril / Ankali, CZ</p>
+                    <p class="gig-entry">04 Sep - Noise Kitchen Festival / Prague, CZ</p>
+                    <p class="gig-entry">03 Sep - TRSY Festival, CZ</p>
+                    <p class="gig-entry">21 Aug - LooseAntenna at LeGram 1 / Renens, CH</p>
+                    <p class="gig-entry">28 Jun - TEPE Meetfactory / Praha, CZ</p>
+                    <p class="gig-entry">11 Jun - Festival Michalský Výpad, CZ</p>
+                    <p class="gig-entry">14 Feb - Palacio Palace, Livestream</p>
+                    <p class="gig-entry">23 Jan - Loose Antenna, Lausanne</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2020">
+                    <span>2020</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">08 Aug - Taciturn, Livestream, Lausanne</p>
+                    <p class="gig-entry">10 Jul - яαω6тεм, CZ</p>
+                    <p class="gig-entry">21 Feb - XYZ Nights / Prague, CZ</p>
+                    <p class="gig-entry">24 Jan - Luft w/ Oliver Torr, CZ</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2019">
+                    <span>2019</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">24 Jan - Varg2™, яαω6тεм Underdogs', CZ</p>
+                    <p class="gig-entry">29 Nov - CUKR Modul / Prague, CZ</p>
+                    <p class="gig-entry">15 Oct - Space Dance Lausanne, CH</p>
+                    <p class="gig-entry">21 Jun - Fete de la musique, Lausanne, CH</p>
+                    <p class="gig-entry">17 May - ONYX x Ankali: Kwartz, Ankali / CZ</p>
+                    <p class="gig-entry">18 Jan - Scéna s Mikem Cornerem / Radio Wave</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2018">
+                    <span>2018</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">22 Dec - Kmitočet 0.3 w/ Ralp, Ankali, CZ</p>
+                    <p class="gig-entry">07 Dec - Lunchmeat Festival w/ Emptyset, CZ</p>
+                    <p class="gig-entry">03 Nov - Closing Altenburg, CZ</p>
+                    <p class="gig-entry">20 Oct - ONYX RAVE, Altenburg 1964 / Prague</p>
+                    <p class="gig-entry">28 Sep - Temno / Radio 1 / Prague, CZ</p>
+                    <p class="gig-entry">22 Sep - Møreti, Sinnan, NS & St.Jakob, CZ</p>
+                    <p class="gig-entry">09 Sep - 909 at Wildt, Prague, CZ</p>
+                    <p class="gig-entry">24 Aug - Polygon Tag 3, Prague, CZ</p>
+                    <p class="gig-entry">29 Dec - Polygon Emergency Crew 2, Ankali, CZ</p>
+                    <p class="gig-entry">20 Aug - Polygon w/ Ilian Tape CZ</p>
+                    <p class="gig-entry">09 Jun - POLYGON NACHT 12, Ankali, Prague, CZ</p>
+                    <p class="gig-entry">21 Apr - Come-in, Neone, Prague, CZ</p>
+                </div>
+            </div>
+
+            <div class="year-block" style="border-bottom:none;">
+                <div class="year-toggle" data-year="2017">
+                    <span>2017</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">Hiatus — Rotterdam and Lausanne</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2016">
+                    <span>2016</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">31 Dec - Velvet NYE, Prague, CZ</p>
+                    <p class="gig-entry">03 Dec - Balance pres. Polygon IfZ, DE</p>
+                    <p class="gig-entry">02 Sep - CUKR 1, Komedie, Prague, CZ</p>
+                    <p class="gig-entry">20 Aug - Polygon w/ Ilian Tape / CZ</p>
+                    <p class="gig-entry">30 Jun - Polygon TAG 1, Prague, CZ</p>
+                    <p class="gig-entry">19 Jul - STALIN, BFF Nathan Solo, CZ</p>
+                    <p class="gig-entry">27 Nov - Smíchovská náplavka, Prague, CZ</p>
+                    <p class="gig-entry">31 Oct - PALASTNACHT 2, Prague, CZ</p>
+                    <p class="gig-entry">02 Oct - POLYGON w/ DINO SABATINI, Prague</p>
+                    <p class="gig-entry">25 Sep - Monument Lights, Prague, CZ</p>
+                    <p class="gig-entry">09 Sep - Sound of Letná, Prague, CZ</p>
+                    <p class="gig-entry">22 Aug - Polygon with Levon Vincent, CZ</p>
+                    <p class="gig-entry">01 Aug - Hangover, Prague, CZ</p>
+                    <p class="gig-entry">18 Jul - Zeitgeist 2 at Vlkova 26 / Prague</p>
+                    <p class="gig-entry">26 Jun - Zeitgeist 1 at Vlkova 26 / Prague</p>
+                    <p class="gig-entry">29 May - RAMEN & TAKOYAKI w/ Nathan Solo, CZ</p>
+                    <p class="gig-entry">13 May - POLYGON NACHT 8, Brno, CZ</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2015">
+                    <span>2015</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">— POLYGON w/ KARENN live [UK], Prague</p>
+                    <p class="gig-entry">— POLYGON w/ TOMMY FOUR SEVEN [UK], Prague</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2014">
+                    <span>2014</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">— POLYGON w/ ALEX.DO, Prague</p>
+                    <p class="gig-entry">— POLYGON w/ RØDHÅD, Prague</p>
+                    <p class="gig-entry">— POLYGON w/ RECONDITE live, Prague</p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="2013">
+                    <span>2013</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="gig-entry">— POLYGON NACHT 4 feat STRSFR, Prague</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RELEASES + MERCH -->
+        <div class="releases">
+            <p class="col-header">RELEASES</p>
+
+            <div class="year-block">
+                <div class="year-toggle open-by-default" data-year="r2025">
+                    <span>2025</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="release-entry">Theropodos, Pulserec <a
+                            href="https://pulserecords.bandcamp.com/album/theropodos" target="_blank">Link to EP</a></p>
+                    <p class="release-entry">Kickdrums for Palestine VA <a
+                            href="https://kdfp.bandcamp.com/album/kick-drums-for-palestine-fundraiser-against-famine"
+                            target="_blank">Link to Thirst</a></p>
+                    <p class="release-entry">Remix for e-garbage, Pulserec <a
+                            href="https://pulserecords.bandcamp.com/track/virus-bat-nathan-solo-remix"
+                            target="_blank">Link to virus.bat</a></p>
+                    <p class="release-entry">Remix for Giri, Domino Doge <a
+                            href="https://dominodoge.bandcamp.com/track/giri-il-primo-fantasma-nathan-solo-remix"
+                            target="_blank">Link to Primo Fantasma</a></p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="r2024">
+                    <span>2024</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="release-entry">Audio Research Tactics, Pulserec. <a
+                            href="https://pulserecords.bandcamp.com/album/audio-research-tactics" target="_blank">Link
+                            to Bandcamp</a></p>
+                    <p class="release-entry">Mixtape at Tracklisting <a
+                            href="https://soundcloud.com/tracklistings3-0/tracklistings-mixtape-688"
+                            target="_blank">Link to Soundcloud</a></p>
+                    <p class="release-entry">Pulse VA 2, Pulserec <a
+                            href="https://pulserecords.bandcamp.com/track/ritual-dance" target="_blank">Link to Ritual
+                            Dance</a></p>
+                    <p class="release-entry">Pulse VA 3, Pulserec <a
+                            href="https://pulserecords.bandcamp.com/track/praktik" target="_blank">Link to Praktik</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="r2023">
+                    <span>2023</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="release-entry">Pulse VA 1, Pulserec <a
+                            href="https://pulserecords.bandcamp.com/track/killed" target="_blank">Link to Killed</a></p>
+                    <p class="release-entry">Remix for Entelechia <a
+                            href="https://pulserecords.bandcamp.com/track/gaya-scienza-nathan-solo-remix"
+                            target="_blank">Link to Gaya Scienza</a></p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="r2021">
+                    <span>2021</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="release-entry">Ministry of Anxiety Album <a
+                            href="https://nathansolo.bandcamp.com/album/ministry-of-anxiety" target="_blank">Link to
+                            Bandcamp</a></p>
+                    <p class="release-entry">Remix for Euclio, Krmelec Rec. <a
+                            href="https://krmelec.bandcamp.com/track/stopover-nathan-solo-remix" target="_blank">Link to
+                            Bandcamp</a></p>
+                    <p class="release-entry">Transporta Records VA <a
+                            href="https://transportarecords.bandcamp.com/track/at-work-05" target="_blank">Link to At
+                            Work 05</a></p>
+                    <p class="release-entry">Connection Failures Album <a
+                            href="https://transportarecords.bandcamp.com/track/at-work-05" target="_blank">Link to Mega
+                            Fun Records</a></p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="r2020">
+                    <span>2020</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="release-entry">Selected Works 5 VA, Beef Records <a
+                            href="https://beefrecords.bandcamp.com/track/hidden-memory" target="_blank">Link to
+                            Bandcamp</a></p>
+                    <p class="release-entry">Black Acid, Dirty Corner Records <a
+                            href="https://nathansolo.bandcamp.com/album/black-acid" target="_blank">Link to Bandcamp</a>
+                    </p>
+                    <p class="release-entry">XYZ Tape 2020, XYZ Project <a
+                            href="https://xyzproject.bandcamp.com/track/nathan-solo-huemann" target="_blank">Link to
+                            Bandcamp</a></p>
+                </div>
+            </div>
+
+            <div class="year-block">
+                <div class="year-toggle" data-year="r2019">
+                    <span>2019</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="release-entry">Remix for Avsluta, XYZ Project <a
+                            href="https://xyzproject.bandcamp.com/track/absent-corporeality-nathan-solo-remix"
+                            target="_blank">Link to Bandcamp</a></p>
+                    <p class="release-entry">XYZ Tape 2019 <a
+                            href="https://xyzproject.bandcamp.com/track/time-travels-in-my-head" target="_blank">Link to
+                            Time Travels In My Head</a></p>
+                    <p class="release-entry">Neo Violence VA20 <a
+                            href="https://xyzproject.bandcamp.com/track/time-travels-in-my-head" target="_blank">Link to
+                            Forgotten Scent</a></p>
+                </div>
+            </div>
+
+            <div class="year-block" style="border-bottom:none;">
+                <div class="year-toggle" data-year="r2016">
+                    <span>2016–17</span><span class="year-arrow">▶</span>
+                </div>
+                <div class="year-content">
+                    <p class="release-entry">Polygon VA 2 <a
+                            href="https://soundcloud.com/polygonpolygon/nathan-solo-saturn?in=polygonpolygon/sets/ordovik-1"
+                            target="_blank">Link to Saturn</a></p>
+                    <p class="release-entry">Polygon VA 1 <a
+                            href="https://soundcloud.com/polygonpolygon/nathan-solo-higgs-bossons?in=polygonpolygon/sets/cambirum"
+                            target="_blank">Link to Higgs Bossons</a></p>
+                </div>
+            </div>
+
+            <!-- PRESS -->
+            <div class="merch-albums">
+                <p class="merch-label">PRESS</p>
+                <p class="release-entry"><a href="https://groove.de/2021/07/28/juli-2021-die-essenziellen-alben-teil-1/" target="_blank">Groove.de — Juli 2021: Die essenziellen Alben</a></p>
+                <p class="release-entry"><a href="https://inverted-audio.com/visual/music-video-nathan-solo-gold/" target="_blank">Inverted Audio — Music Video Premiere: 'Gold'</a></p>
+                <p class="release-entry"><a href="https://www.fullmoonzine.cz/3-na-3-virtual-healing-covid19-antidote/" target="_blank">Full Moon Magazine — 3 na 3: Virtual Healing / Covid19 Antidote</a></p>
+            </div>
+
+            <!-- MERCH -->
+            <div class="merch-albums">
+                <p class="merch-label">MERCH</p>
+                <div class="album-grid">
+                    <a href="https://matejmoravec.com/product/techno" target="_blank" class="album-item">
+                        <img src="teechno.png" alt="Techno T-Shirt">
+                        <span>Teechno</span>
+                    </a>
+                    <a href="https://pulserecords.bandcamp.com/album/audio-research-tactics" target="_blank"
+                        class="album-item">
+                        <img src="artcassette.jpg" alt="A.R.T Cassette Tape">
+                        <span>A.R.T. Tape</span>
+                    </a>
+                    <a href="https://matejmoravec.com/product/art-ns-totebag" target="_blank" class="album-item">
+                        <img src="bagns.jpg" alt="NS Tote Bag">
+                        <span>NS ToteBag</span>
+                    </a>
+                    <a href="https://matejmoravec.com/product/circular-vinyl-rave-techno-t-shirt" target="_blank"
+                        class="album-item">
+                        <img src="teerave.png" alt="Rave T-shirt">
+                        <span>Rave T-shirt</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="profile-photo" id="profilePhoto"></div>
+
+    <button id="topButton" class="top-button" onclick="scrollToTop()">
+        <p>↑</p>
+    </button>
+
+    <footer class="footer">
+        © 2012 — 2026, Nathan Solo - V5.0 (Jun 2026) - <a href="https://matejmoravec.com" target="_blank">made by :
+            matejmoravec.com</a> with the help of Claude Code AI.
+    </footer>
+
+    <script>
+        // ── Scroll to top ──
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', function() {
+            const button = document.getElementById('topButton');
+            button.classList.toggle('show', window.scrollY > 300);
+        });
+
+        // ── Year accordion ──
+        document.querySelectorAll('.year-toggle').forEach(toggle => {
+            const content = toggle.nextElementSibling;
+            const arrow = toggle.querySelector('.year-arrow');
+
+            if (toggle.classList.contains('open-by-default')) {
+                content.classList.add('open');
+                arrow.classList.add('open');
+            }
+
+            toggle.addEventListener('click', () => {
+                const isOpen = content.classList.contains('open');
+                content.classList.toggle('open', !isOpen);
+                arrow.classList.toggle('open', !isOpen);
+            });
+        });
+
+        // ── Bouncy avatar with edge-collision image/size change ──
+        document.addEventListener("DOMContentLoaded", function() {
+            const photo = document.getElementById("profilePhoto");
+
+            // ── Auto-detect how many images exist in /pictures/ ──
+            // Looks for pictures/image1.jpg, image2.jpg, ... stops at first missing one.
+            // Add or remove images freely — no code changes needed, just keep them numbered with no gaps.
+            const IMAGE_FOLDER = "images/";
+            const IMAGE_EXT = ".jpg"; // change to .png or .jpeg if needed
+            let validImages = [];
+            let currentImageIndex = -1;
+
+            function probeImages(index) {
+                const img = new Image();
+                img.onload = function() {
+                    validImages.push(IMAGE_FOLDER + "image" + index + IMAGE_EXT);
+                    probeImages(index + 1);
+                };
+                img.onerror = function() {
+                    // stop probing — reached the end of the numbered sequence
+                    if (validImages.length > 0) {
+                        photo.style.backgroundImage = "url('" + validImages[0] + "')";
+                        currentImageIndex = 0;
+                    }
+                };
+                img.src = IMAGE_FOLDER + "image" + index + IMAGE_EXT;
+            }
+            probeImages(1);
+
+            function changeImageOnHit() {
+                if (validImages.length < 2) return; // nothing to switch to
+                let next;
+                do {
+                    next = Math.floor(Math.random() * validImages.length);
+                } while (next === currentImageIndex);
+                currentImageIndex = next;
+                photo.style.backgroundImage = "url('" + validImages[next] + "')";
+            }
+
+            // ── Fixed size (no change on hit) ──
+            const baseSizeVh = 32.5;
+
+            // ── Movement ──
+            let size = window.innerHeight * (baseSizeVh / 100);
+            let x = 100;
+            let y = 100;
+
+            const baseVx = 1.5;
+            const baseVy = 1.5;
+            let vx = baseVx;
+            let vy = baseVy;
+            let boostEndTime = 0;
+
+            function onEdgeHit() {
+                changeImageOnHit();
+            }
+
+            function movePhoto() {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+
+                if (x <= 0) { x = 0; vx = Math.abs(vx); onEdgeHit(); }
+                if (x + size >= w) { x = w - size; vx = -Math.abs(vx); onEdgeHit(); }
+                if (y <= 0) { y = 0; vy = Math.abs(vy); onEdgeHit(); }
+                if (y + size >= h) { y = h - size; vy = -Math.abs(vy); onEdgeHit(); }
+
+                x += vx;
+                y += vy;
+
+                const now = Date.now();
+                if (now >= boostEndTime) {
+                    if (Math.abs(vx) > baseVx) vx = vx * 0.98 + Math.sign(vx) * baseVx * 0.02;
+                    if (Math.abs(vy) > baseVy) vy = vy * 0.98 + Math.sign(vy) * baseVy * 0.02;
+                }
+
+                photo.style.left = x + "px";
+                photo.style.top = y + "px";
+                requestAnimationFrame(movePhoto);
+            }
+
+            function applyBoost(clientX, clientY) {
+                const rect = photo.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const dx = centerX - clientX;
+                const dy = centerY - clientY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance > 0 && distance < 180) {
+                    const force = (180 - distance) / 50;
+                    vx += (dx / distance) * force;
+                    vy += (dy / distance) * force;
+                    boostEndTime = Date.now() + 100;
+                }
+            }
+
+            document.addEventListener('mousemove', e => applyBoost(e.clientX, e.clientY));
+            movePhoto();
+        });
+    </script>
+</body>
+
+
+</html>
